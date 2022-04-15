@@ -3,8 +3,10 @@ package com.codecamp.SpyGlassApi.domain.user.model;
 import com.codecamp.SpyGlassApi.domain.goal.model.Goal;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
+@Table(name="user")
 public class User {
 
     @Id
@@ -12,6 +14,10 @@ public class User {
     private String firstName;
     private String lastName;
     private String email;
+
+    @OneToMany(targetEntity = Goal.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    @JoinColumn(name = "user_id")
+    private List<Goal> listOfGoals;
 
     public User() {
     }
@@ -46,6 +52,14 @@ public class User {
         this.lastName = lastName;
     }
 
+    public List<Goal> getListOfGoals() {
+        return listOfGoals;
+    }
+
+    public void setListOfGoals(List<Goal> listOfGoals) {
+        this.listOfGoals = listOfGoals;
+    }
+
     public String getEmail() {
         return email;
     }
@@ -61,6 +75,7 @@ public class User {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
+                ", listOfGoals=" + listOfGoals +
                 '}';
     }
 }
