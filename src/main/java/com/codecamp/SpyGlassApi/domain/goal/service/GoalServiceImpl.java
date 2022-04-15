@@ -35,6 +35,7 @@ public class GoalServiceImpl implements GoalService{
 
     @Override
     public Goal updateGoal(Goal goal) throws GoalNotFoundException {
+        Long id = goal.
         return null;
     }
 
@@ -43,9 +44,8 @@ public class GoalServiceImpl implements GoalService{
 
     }
 
-    private Integer calculateProgessPercentage(Double targetSavingsAmount, Double amountAlreadySaved){
+    private Integer calculateProgressPercentage(Double targetSavingsAmount, Double amountAlreadySaved){
         return null;
-
     }
 
     private Integer calculateAmountLeftUntilGoal(Double targetSavingsAmount, Double amountAlreadySaved){
