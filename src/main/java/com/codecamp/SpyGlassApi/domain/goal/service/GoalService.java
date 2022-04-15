@@ -10,7 +10,6 @@ public interface GoalService {
     Goal getById(Long id) throws GoalNotFoundException;
     Goal getByGoal(String name) throws GoalNotFoundException;
     Goal getByGoalType(TypeOfGoal typeOfGoal) throws GoalNotFoundException;
-    Iterable<Goal> findAllGoalsForUser(User user);
     Goal updateGoal(Goal goal) throws GoalNotFoundException;
-    void deleteGoal(Goal goal) throws GoalNotFoundException;
+    void deleteGoal(Long id) throws GoalNotFoundException;
 }

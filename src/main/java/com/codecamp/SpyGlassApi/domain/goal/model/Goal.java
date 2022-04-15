@@ -12,6 +12,7 @@ public class Goal {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
@@ -136,5 +137,23 @@ public class Goal {
 
     public void setProgressPercentage(Double progressPercentage) {
         this.progressPercentage = progressPercentage;
+    }
+
+    @Override
+    public String toString() {
+        return "Goal{" +
+                "id=" + id +
+                ", user=" + user +
+                ", typeOfGoal=" + typeOfGoal +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", goalIcon='" + goalIcon + '\'' +
+                ", customGoalColor='" + customGoalColor + '\'' +
+                ", targetSavingsAmount=" + targetSavingsAmount +
+                ", amountAlreadySaved=" + amountAlreadySaved +
+                ", savingsDateGoal=" + savingsDateGoal +
+                ", amountLeftUntilGoal=" + amountLeftUntilGoal +
+                ", progressPercentage=" + progressPercentage +
+                '}';
     }
 }

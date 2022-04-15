@@ -4,7 +4,6 @@ import com.codecamp.SpyGlassApi.domain.goal.exceptions.GoalNotFoundException;
 import com.codecamp.SpyGlassApi.domain.goal.model.Goal;
 import com.codecamp.SpyGlassApi.domain.goal.model.TypeOfGoal;
 import com.codecamp.SpyGlassApi.domain.goal.repo.GoalRepo;
-import com.codecamp.SpyGlassApi.domain.user.model.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,7 +23,7 @@ public class GoalServiceImpl implements GoalService{
 
     @Override
     public Goal create(Goal goal) {
-        calculateProgressPercentage(goal);
+        calculateProgress(goal);
         return goalRepo.save(goal);
     }
 
@@ -53,26 +52,28 @@ public class GoalServiceImpl implements GoalService{
     }
 
     @Override
-    public Iterable<Goal> findAllGoalsForUser(User user) {
-        return null;
-    }
-
-    @Override
     public Goal updateGoal(Goal goal) throws GoalNotFoundException {
         Long id = goal.getId();
         Optional<Goal> goalOptional = goalRepo.findById(id);
         if(goalOptional.isEmpty()){
             throw new GoalNotFoundException("Goal not found");
         }
-        return null;
+        Goal goalUpdated = goalOptional.get();
+        calculateProgress(goalUpdated);
+        return goalRepo.save(goalUpdated);
     }
 
     @Override
-    public void deleteGoal(Goal goal) throws GoalNotFoundException {
-
+    public void deleteGoal(Long id) throws GoalNotFoundException {
+        Optional<Goal> goalOptional = goalRepo.findById(id);
+        if(goalOptional.isEmpty()){
+            throw new GoalNotFoundException("Goal with ID: " + id + "not found");
+        }
+        Goal goalToRemove = goalOptional.get();
+        goalRepo.delete(goalToRemove);
     }
 
-    private static void calculateProgressPercentage(Goal goal){
+    private static void calculateProgress(Goal goal){
         Double amountAlreadySaved = goal.getAmountAlreadySaved();
         Double targetSavingsAmount = goal.getTargetSavingsAmount();
         Double decimal = (amountAlreadySaved / targetSavingsAmount) * 100;
@@ -80,6 +81,7 @@ public class GoalServiceImpl implements GoalService{
 
         Double amountLeft = targetSavingsAmount - amountAlreadySaved;
         goal.setAmountLeftUntilGoal(amountLeft);
+        log.info("ProgressBar complete for goal");
     }
 
 }
