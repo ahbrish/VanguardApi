@@ -17,7 +17,7 @@ public class Goal {
     private User user;
 
     private TypeOfGoal typeOfGoal;
-    private String title;
+    private String name;
     private String description;
     private String goalIcon;
     private String customGoalColor;
@@ -25,15 +25,15 @@ public class Goal {
     private Double amountAlreadySaved;
     private Date savingsDateGoal;
     private Double amountLeftUntilGoal;
-    private Integer progressPercentage;
+    private Double progressPercentage;
 
     public Goal() {
     }
 
-    public Goal(User user, TypeOfGoal typeOfGoal, String title, String description, String goalIcon, String customGoalColor, Double targetSavingsAmount, Double amountAlreadySaved, Date savingsDateGoal) {
+    public Goal(User user, TypeOfGoal typeOfGoal, String name, String description, String goalIcon, String customGoalColor, Double targetSavingsAmount, Double amountAlreadySaved, Date savingsDateGoal) {
         this.user = user;
         this.typeOfGoal = typeOfGoal;
-        this.title = title;
+        this.name = name;
         this.description = description;
         this.goalIcon = goalIcon;
         this.customGoalColor = customGoalColor;
@@ -66,12 +66,12 @@ public class Goal {
         this.typeOfGoal = typeOfGoal;
     }
 
-    public String getTitle() {
-        return title;
+    public String getName() {
+        return name;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setName(String title) {
+        this.name = title;
     }
 
     public String getDescription() {
@@ -130,11 +130,11 @@ public class Goal {
         this.amountLeftUntilGoal = amountLeftUntilGoal;
     }
 
-    public Integer getProgressPercentage() {
+    public Double getProgressPercentage() {
         return progressPercentage;
     }
 
-    public void setProgressPercentage(Integer progressPercentage) {
+    public void setProgressPercentage(Double progressPercentage) {
         this.progressPercentage = progressPercentage;
     }
 }
