@@ -23,11 +23,11 @@ public class User {
     public User() {
     }
 
-    public User(String userName, String firstName, String lastName, List<Goal> listOfGoals) {
+    public User(String userName, String firstName, String lastName, String email) {
         this.userName = userName;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.listOfGoals = listOfGoals;
+        this.email = email;
     }
 
     public String getUserName() {
