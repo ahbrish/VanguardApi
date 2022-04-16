@@ -1,7 +1,5 @@
 package com.codecamp.SpyGlassApi.domain.user.service;
 
-import com.codecamp.SpyGlassApi.domain.goal.model.Goal;
-import com.codecamp.SpyGlassApi.domain.goal.service.GoalService;
 import com.codecamp.SpyGlassApi.domain.user.exceptions.UserNameNotFoundException;
 import com.codecamp.SpyGlassApi.domain.user.model.User;
 import com.codecamp.SpyGlassApi.domain.user.repo.UserRepo;
@@ -13,7 +11,8 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl implements UserService{
 
     private UserRepo userRepo;
-    private GoalService goalService;
+    private UserService userService;
+//    private GoalService goalService;
 
     @Autowired
     public UserServiceImpl(UserRepo userRepo){
@@ -30,10 +29,10 @@ public class UserServiceImpl implements UserService{
         return null;
     }
 
-    @Override
-    public Iterable<Goal> getAllGoals(User user) {
-        return null;
-    }
+//    @Override
+//    public Iterable<Goal> getAllGoals(User user) {
+//        return null;
+//    }
 
 
     @Override

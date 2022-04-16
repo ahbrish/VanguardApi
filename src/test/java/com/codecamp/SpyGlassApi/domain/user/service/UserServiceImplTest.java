@@ -1,8 +1,6 @@
 package com.codecamp.SpyGlassApi.domain.user.service;
 
-import com.codecamp.SpyGlassApi.domain.user.exceptions.UserNameNotFoundException;
 import com.codecamp.SpyGlassApi.domain.user.exceptions.UserNameTakenException;
-import com.codecamp.SpyGlassApi.domain.user.exceptions.UserNotFoundException;
 import com.codecamp.SpyGlassApi.domain.user.model.User;
 import com.codecamp.SpyGlassApi.domain.user.repo.UserRepo;
 import org.junit.jupiter.api.Assertions;
@@ -17,9 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-
-import java.util.Optional;
-
 
 @SpringBootTest
 @ExtendWith(SpringExtension.class)
@@ -42,6 +37,7 @@ public class UserServiceImplTest {
 //        outputUser01.setId(1L);
     }
 
+
     @Test
     @DisplayName("Creating a User - Success")
     public void createUserAccountTest01() throws UserNameTakenException {
@@ -51,14 +47,6 @@ public class UserServiceImplTest {
         Assertions.assertEquals(returnedUser.getUserName(), "tsunamiMaxx");
     }
 
-//    @Test
-//    @DisplayName("User getById - Success")
-//    public void getUserByIdTest01() throws UserNotFoundException {
-//        doReturn(Optional.of(outputUser01)).when(mockUserRepo).findById(1L);
-//        User foundUser = userService.getUserById(1L);
-//
-//        Assertions.assertEquals(outputUser01.toString(), foundUser.toString());
-//    }
 
 //    @Test
 //    @DisplayName("")

@@ -1,6 +1,5 @@
 package com.codecamp.SpyGlassApi.domain.user.model;
 
-import com.codecamp.SpyGlassApi.domain.goal.model.Goal;
 
 import javax.persistence.*;
 import java.util.List;
@@ -9,15 +8,19 @@ import java.util.List;
 @Table(name="user")
 public class User {
 
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.AUTO)
+//    private Long id;
+
     @Id
     private String userName;
     private String firstName;
     private String lastName;
     private String email;
 
-    @OneToMany(targetEntity = Goal.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
-    @JoinColumn(name = "user_id")
-    private List<Goal> listOfGoals;
+//    @OneToMany(targetEntity = Goal.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+//    @JoinColumn(name = "user_id", referencedColumnName = "id")
+//    private List<Goal> listOfGoals;
 
     public User() {
     }
@@ -27,6 +30,14 @@ public class User {
         this.lastName = lastName;
         this.email = email;
     }
+
+//    public Long getId() {
+//        return id;
+//    }
+
+//    public void setId(Long id) {
+//        this.id = id;
+//    }
 
     public String getUserName() {
         return userName;
@@ -52,13 +63,13 @@ public class User {
         this.lastName = lastName;
     }
 
-    public List<Goal> getListOfGoals() {
-        return listOfGoals;
-    }
+//    public List<Goal> getListOfGoals() {
+//        return listOfGoals;
+//    }
 
-    public void setListOfGoals(List<Goal> listOfGoals) {
-        this.listOfGoals = listOfGoals;
-    }
+//    public void setListOfGoals(List<Goal> listOfGoals) {
+//        this.listOfGoals = listOfGoals;
+//    }
 
     public String getEmail() {
         return email;
@@ -75,7 +86,6 @@ public class User {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
-                ", listOfGoals=" + listOfGoals +
                 '}';
     }
 }
