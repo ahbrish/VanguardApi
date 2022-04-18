@@ -104,27 +104,27 @@ public class GoalServiceImplTest {
         });
     }
 
-//    @Test
-//    @DisplayName("Get Goal by Goal -Success")
-//    public void getByGoalSuccessTest() throws GoalNotFoundException {
-//        BDDMockito.doReturn(Optional.of(inputGoal)).when(goalRepo).findByGoal("bora bora");
-//        Goal foundGoal = goalService.getByGoal("bora bora");
-//        Assertions.assertEquals(inputGoal, foundGoal);
-//    }
+    @Test
+    @DisplayName("Get Goal by Goal -Success")
+    public void getByGoalSuccessTest() throws GoalNotFoundException {
+        BDDMockito.doReturn(Optional.of(inputGoal)).when(goalRepo).findByGoalName("bora bora");
+        Goal foundGoal = goalService.getByGoal("bora bora");
+        Assertions.assertEquals(inputGoal, foundGoal);
+    }
 
-//    @Test
-//    @DisplayName("Get Goal by Goal -Failed")
-//    public void getByGoalTest() {
-//        BDDMockito.doReturn(Optional.empty()).when(goalRepo).findByGoal("bora bora");
-//        Assertions.assertThrows(GoalNotFoundException.class, () -> {
-//            goalService.getByGoal("bora bora");
-//        });
-//    }
+    @Test
+    @DisplayName("Get Goal by Goal -Failed")
+    public void getByGoalTest() {
+        BDDMockito.doReturn(Optional.empty()).when(goalRepo).findByGoalName("bora bora");
+        Assertions.assertThrows(GoalNotFoundException.class, () -> {
+            goalService.getByGoal("bora bora");
+        });
+    }
 
     @Test
     @DisplayName("Get Goal by GoalType -Success")
     public void getByGoalTypeSuccessTest () throws GoalNotFoundException {
-        BDDMockito.doReturn(Optional.of(inputGoal)).when(goalRepo).findByGoalType(TypeOfGoal.VACATION);
+        BDDMockito.doReturn(Optional.of(inputGoal)).when(goalRepo).findByTypeOfGoal(TypeOfGoal.VACATION);
         Goal foundGoal = goalService.getByGoalType(TypeOfGoal.VACATION);
         Assertions.assertEquals(inputGoal, foundGoal);
     }
@@ -132,7 +132,7 @@ public class GoalServiceImplTest {
     @Test
     @DisplayName("Get Goal by GoalType -Failed")
     public void getByGoalTypeTest () {
-        BDDMockito.doReturn(Optional.empty()).when(goalRepo).findByGoalType(TypeOfGoal.VACATION);
+        BDDMockito.doReturn(Optional.empty()).when(goalRepo).findByTypeOfGoal(TypeOfGoal.VACATION);
         Assertions.assertThrows(GoalNotFoundException.class, () -> {
             goalService.getByGoalType(TypeOfGoal.VACATION);
         });

@@ -33,6 +33,9 @@ public class UserServiceImplTest {
     @MockBean
     private UserRepo mockUserRepo;
 
+    @MockBean
+    private GoalService goalService;
+
     @Autowired
     private UserService userService;
 
@@ -40,7 +43,7 @@ public class UserServiceImplTest {
     private User outputUser01;
     private Goal inputGoal01;
     private SimpleDateFormat simpleDateFormat;
-    private GoalService goalService;
+
 
     @BeforeEach
     public void setUp() throws ParseException {

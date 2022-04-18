@@ -18,7 +18,7 @@ public class Goal {
     private User user;
 
     private TypeOfGoal typeOfGoal;
-    private String name;
+    private String goalName;
     private String description;
     private String goalIcon;
     private String customGoalColor;
@@ -31,10 +31,10 @@ public class Goal {
     public Goal() {
     }
 
-    public Goal(User user, TypeOfGoal typeOfGoal, String name, String description, String goalIcon, String customGoalColor, Double targetSavingsAmount, Double amountAlreadySaved, Date savingsDateGoal) {
+    public Goal(User user, TypeOfGoal typeOfGoal, String goalName, String description, String goalIcon, String customGoalColor, Double targetSavingsAmount, Double amountAlreadySaved, Date savingsDateGoal) {
         this.user = user;
         this.typeOfGoal = typeOfGoal;
-        this.name = name;
+        this.goalName = goalName;
         this.description = description;
         this.goalIcon = goalIcon;
         this.customGoalColor = customGoalColor;
@@ -67,12 +67,12 @@ public class Goal {
         this.typeOfGoal = typeOfGoal;
     }
 
-    public String getName() {
-        return name;
+    public String getGoalName() {
+        return goalName;
     }
 
     public void setName(String title) {
-        this.name = title;
+        this.goalName = title;
     }
 
     public String getDescription() {
@@ -145,7 +145,7 @@ public class Goal {
                 "id=" + id +
                 ", user=" + user +
                 ", typeOfGoal=" + typeOfGoal +
-                ", name='" + name + '\'' +
+                ", name='" + goalName + '\'' +
                 ", description='" + description + '\'' +
                 ", goalIcon='" + goalIcon + '\'' +
                 ", customGoalColor='" + customGoalColor + '\'' +

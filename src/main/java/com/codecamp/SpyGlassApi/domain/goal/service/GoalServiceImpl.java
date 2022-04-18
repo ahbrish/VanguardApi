@@ -35,17 +35,17 @@ public class GoalServiceImpl implements GoalService{
         return goalOptional.get();
     }
 
-//    @Override
-//    public Goal getByGoal(String name) throws GoalNotFoundException {
-//        Optional<Goal> goalOptional = goalRepo.findByGoal(name);
-//        if(goalOptional.isEmpty())
-//            throw new GoalNotFoundException("Goal Not Found");
-//        return goalOptional.get();
-//    }
+    @Override
+    public Goal getByGoal(String name) throws GoalNotFoundException {
+        Optional<Goal> goalOptional = goalRepo.findByGoalName(name);
+        if(goalOptional.isEmpty())
+            throw new GoalNotFoundException("Goal Not Found");
+        return goalOptional.get();
+    }
 
     @Override
     public Goal getByGoalType(TypeOfGoal typeOfGoal) throws GoalNotFoundException {
-        Optional<Goal> goalOptional = goalRepo.findByGoalType(typeOfGoal);
+        Optional<Goal> goalOptional = goalRepo.findByTypeOfGoal(typeOfGoal);
         if(goalOptional.isEmpty())
             throw new GoalNotFoundException("Goal Not Found");
         return goalOptional.get();

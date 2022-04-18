@@ -7,6 +7,6 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.Optional;
 
 public interface GoalRepo extends CrudRepository<Goal,Long> {
-    Optional<Goal> findByGoal(String name);
-    Optional<Goal> findByGoalType(TypeOfGoal typeOfGoal);
+    Optional<Goal> findByGoalName(String name);
+    Optional<Goal> findByTypeOfGoal(TypeOfGoal typeOfGoal);
 }
