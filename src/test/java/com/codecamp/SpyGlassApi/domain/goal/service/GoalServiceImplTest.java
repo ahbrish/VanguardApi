@@ -104,22 +104,22 @@ public class GoalServiceImplTest {
         });
     }
 
-    @Test
-    @DisplayName("Get Goal by Goal -Success")
-    public void getByGoalSuccessTest() throws GoalNotFoundException {
-        BDDMockito.doReturn(Optional.of(inputGoal)).when(goalRepo).findByGoal("bora bora");
-        Goal foundGoal = goalService.getByGoal("bora bora");
-        Assertions.assertEquals(inputGoal, foundGoal);
-    }
+//    @Test
+//    @DisplayName("Get Goal by Goal -Success")
+//    public void getByGoalSuccessTest() throws GoalNotFoundException {
+//        BDDMockito.doReturn(Optional.of(inputGoal)).when(goalRepo).findByGoal("bora bora");
+//        Goal foundGoal = goalService.getByGoal("bora bora");
+//        Assertions.assertEquals(inputGoal, foundGoal);
+//    }
 
-    @Test
-    @DisplayName("Get Goal by Goal -Failed")
-    public void getByGoalTest() {
-        BDDMockito.doReturn(Optional.empty()).when(goalRepo).findByGoal("bora bora");
-        Assertions.assertThrows(GoalNotFoundException.class, () -> {
-            goalService.getByGoal("bora bora");
-        });
-    }
+//    @Test
+//    @DisplayName("Get Goal by Goal -Failed")
+//    public void getByGoalTest() {
+//        BDDMockito.doReturn(Optional.empty()).when(goalRepo).findByGoal("bora bora");
+//        Assertions.assertThrows(GoalNotFoundException.class, () -> {
+//            goalService.getByGoal("bora bora");
+//        });
+//    }
 
     @Test
     @DisplayName("Get Goal by GoalType -Success")

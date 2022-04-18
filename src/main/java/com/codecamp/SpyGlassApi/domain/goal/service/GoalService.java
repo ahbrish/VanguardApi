@@ -8,7 +8,7 @@ import com.codecamp.SpyGlassApi.domain.user.model.User;
 public interface GoalService {
     Goal create(Goal goal);
     Goal getById(Long id) throws GoalNotFoundException;
-    Goal getByGoal(String name) throws GoalNotFoundException;
+//    Goal getByGoal(String name) throws GoalNotFoundException;
     Goal getByGoalType(TypeOfGoal typeOfGoal) throws GoalNotFoundException;
     Goal updateGoal(Goal goal) throws GoalNotFoundException;
     void deleteGoal(Long id) throws GoalNotFoundException;

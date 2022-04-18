@@ -1,8 +1,10 @@
 package com.codecamp.SpyGlassApi.domain.user.service;
 
+import com.codecamp.SpyGlassApi.domain.goal.model.Goal;
+import com.codecamp.SpyGlassApi.domain.goal.model.TypeOfGoal;
+import com.codecamp.SpyGlassApi.domain.goal.service.GoalService;
 import com.codecamp.SpyGlassApi.domain.user.exceptions.UserNameNotFoundException;
 import com.codecamp.SpyGlassApi.domain.user.exceptions.UserNameTakenException;
-import com.codecamp.SpyGlassApi.domain.user.exceptions.UserNotFoundException;
 import com.codecamp.SpyGlassApi.domain.user.model.User;
 import com.codecamp.SpyGlassApi.domain.user.repo.UserRepo;
 import org.junit.jupiter.api.Assertions;
@@ -18,8 +20,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
-
 
 @SpringBootTest
 @ExtendWith(SpringExtension.class)
@@ -33,13 +38,22 @@ public class UserServiceImplTest {
 
     private User inputUser01;
     private User outputUser01;
+    private Goal inputGoal01;
+    private SimpleDateFormat simpleDateFormat;
+    private GoalService goalService;
 
     @BeforeEach
-    public void setUp(){
+    public void setUp() throws ParseException {
         inputUser01 = new User("tsunamiMaxx","Maxx","Blue", "tsunamiMaxx@gmail.com");
         outputUser01 = new User("tsunamiMaxx","Maxx","Blue","tsunamiMaxx@gmail.com");
         outputUser01.setUserName("tsunamiMaxx");
-//        outputUser01.setId(1L);
+
+        simpleDateFormat = new SimpleDateFormat("mm-dd-yyyy");
+        inputGoal01 = new Goal(outputUser01, TypeOfGoal.VACATION, "bora bora","vacation with fam","beach icon","blue",500.00,100.00,simpleDateFormat.parse("05-25-2022"));
+        goalService.create(inputGoal01);
+        List<Goal> goals = new ArrayList<>();
+        goals.add(inputGoal01);
+        outputUser01.setListOfGoals(goals);
     }
 
     @Test
@@ -51,29 +65,35 @@ public class UserServiceImplTest {
         Assertions.assertEquals(returnedUser.getUserName(), "tsunamiMaxx");
     }
 
-//    @Test
-//    @DisplayName("User getById - Success")
-//    public void getUserByIdTest01() throws UserNotFoundException {
-//        doReturn(Optional.of(outputUser01)).when(mockUserRepo).findById(1L);
-//        User foundUser = userService.getUserById(1L);
-//
-//        Assertions.assertEquals(outputUser01.toString(), foundUser.toString());
-//    }
-
-//    @Test
-//    @DisplayName("")
-//    public void findByUserByUserName() throws UserNameNotFoundException {
-//        Optional<User> userOptional = mockUserRepo.findByUserName();
-//    }
-
-//    @Test
-//    @DisplayName("Delete a User Account - Success")
-//    public void deleteUserAccount01() throws UserNameNotFoundException{
-//        Optional<User> userExistOption = mockUserRepo.findByUserName("tsunamiMaxx");
-//        if(userExistOption.isEmpty())
-//            throw new UserNameNotFoundException("No account found with given username");
-//        User userAccountToRemove = userExistOption.get();
-//        mockUserRepo.delete(userAccountToRemove);
+    @Test
+    @DisplayName("User Service findUserByUserName - Success")
+    public void findByUserNameSuccess() throws UserNameNotFoundException {
+        doReturn(Optional.of(outputUser01)).when(mockUserRepo).findByUserName("tsunamiMaxx");
+        User foundUser = userService.findUserByUserName("tsunamiMaxx");
+        Assertions.assertEquals(outputUser01.toString(), foundUser.toString());
     }
 
-//}
+    @Test
+    @DisplayName("User Service findUserByUserName - Fail")
+    public void findByUserNameFail(){
+        doReturn(Optional.empty()).when(mockUserRepo).findByUserName("tsunamiMaxx");
+        Assertions.assertThrows(UserNameNotFoundException.class, () -> {
+            userService.findUserByUserName("tsunamiMaxx");});
+    }
+
+    @Test
+    @DisplayName("User Service: Get All Goals - Success")
+    public void getAllGoalsSuccess() {
+        doReturn(Optional.of(outputUser01)).when(mockUserRepo).findByUserName("tsunamiMaxx");
+
+    }
+
+    @Test
+    @DisplayName("Delete a User Account - Success")
+    public void deleteUserAccount() throws UserNameNotFoundException{
+        doReturn(Optional.empty()).when(mockUserRepo).findByUserName("tsunamiMaxx");
+        Assertions.assertThrows(UserNameNotFoundException.class, ()-> {
+            userService.deleteUserAccount("tsunamiMaxx");
+        });
+    }
+}
