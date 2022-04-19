@@ -1,5 +1,6 @@
 package com.codecamp.SpyGlassApi.domain.user.service;
 
+import com.codecamp.SpyGlassApi.domain.goal.exceptions.GoalNotFoundException;
 import com.codecamp.SpyGlassApi.domain.goal.model.Goal;
 import com.codecamp.SpyGlassApi.domain.goal.model.TypeOfGoal;
 import com.codecamp.SpyGlassApi.domain.goal.service.GoalService;
@@ -86,8 +87,15 @@ public class UserServiceImplTest {
 
     @Test
     @DisplayName("User Service: Get All Goals - Success")
-    public void getAllGoalsSuccess() {
+    public void getAllGoalsSuccess() throws UserNameNotFoundException, GoalNotFoundException {
         doReturn(Optional.of(outputUser01)).when(mockUserRepo).findByUserName("tsunamiMaxx");
+        User foundUser = userService.findUserByUserName("tsunamiMaxx");
+
+        List<Goal> goals = new ArrayList<>();
+        goals.add(inputGoal01);
+        doReturn(foundUser)
+        Assertions.assertEquals();
+
 
     }
 
