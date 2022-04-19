@@ -2,6 +2,7 @@ package com.codecamp.SpyGlassApi.domain.goal.controller;
 
 import com.codecamp.SpyGlassApi.domain.goal.exceptions.GoalNotFoundException;
 import com.codecamp.SpyGlassApi.domain.goal.model.Goal;
+import com.codecamp.SpyGlassApi.domain.goal.model.TypeOfGoal;
 import com.codecamp.SpyGlassApi.domain.goal.service.GoalService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/goal")
 @Slf4j
 public class GoalController {
+
     private GoalService goalService;
 
     @Autowired
@@ -23,13 +25,26 @@ public class GoalController {
     @PostMapping("")
     public ResponseEntity<Goal> create(@RequestBody Goal goal){
         goal = goalService.create(goal);
-        return new ResponseEntity<>(goal, HttpStatus.CREATED);
+        return new ResponseEntity<>(goal,HttpStatus.CREATED);
     }
 
-
     @GetMapping("/{id}")
-    public ResponseEntity<Goal> requestUser(@PathVariable Long id) throws GoalNotFoundException {
+    public ResponseEntity<Goal> requestGoalById(@PathVariable Long id) throws GoalNotFoundException {
         Goal response = goalService.getById(id);
+        log.info(response.toString());
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @GetMapping("/{goal}")
+    public ResponseEntity<Goal> requestGoalByName(@PathVariable String name) throws GoalNotFoundException {
+        Goal response = goalService.getByGoal(name);
+        log.info(response.toString());
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @GetMapping("/{goalType}")
+    public ResponseEntity<Goal> requestGoalByType(@PathVariable TypeOfGoal typeOfGoal) throws GoalNotFoundException {
+        Goal response = goalService.getByGoalType(typeOfGoal);
         log.info(response.toString());
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
@@ -65,6 +80,7 @@ public class GoalController {
                     .build();
         }
     }
-
-
 }
+
+
+

@@ -40,7 +40,7 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public List<Goal> getAllGoals(User user) throws UserNotFoundException {
+    public List<Goal> getAllGoalsForUser(User user) throws UserNotFoundException {
         Optional<User> userOptional = userRepo.findByUserName(user.getUserName());
         if(userOptional.isEmpty())
             throw new UserNotFoundException("User not found");
