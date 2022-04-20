@@ -24,6 +24,7 @@ public class UserController {
     public UserController(UserService userService){
         this.userService = userService;
     }
+
     @GetMapping("/me")
     public ResponseEntity<User> getUserInfo(@AuthenticationPrincipal FireBaseUser fireBaseUser) throws Exception{
         log.info(fireBaseUser.getEmail());
