@@ -9,9 +9,9 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
-@SpringBootTest
-@AutoConfigureMockMvc
-@ExtendWith(SpringExtension.class);
+//@SpringBootTest
+//@AutoConfigureMockMvc
+//@ExtendWith(SpringExtension.class);
 public class GoalControllerTest {
 
     @MockBean
@@ -20,5 +20,5 @@ public class GoalControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-    private
+//    private
 }

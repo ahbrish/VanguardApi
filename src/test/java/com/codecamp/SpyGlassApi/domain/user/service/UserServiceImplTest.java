@@ -93,8 +93,8 @@ public class UserServiceImplTest {
 
         List<Goal> goals = new ArrayList<>();
         goals.add(inputGoal01);
-        doReturn(foundUser)
-        Assertions.assertEquals();
+//        doReturn(foundUser)
+//        Assertions.assertEquals();
 
 
     }
