@@ -11,7 +11,7 @@
 	<groupId>com.codecamp</groupId>
 	<artifactId>spyglassapi</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>VanguardApi</name>
+	<name>spyglassapi</name>
 	<description>Bank Mobile App</description>
 	<properties>
 		<java.version>11</java.version>

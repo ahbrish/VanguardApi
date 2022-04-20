@@ -5,6 +5,8 @@ import com.codecamp.SpyGlassApi.security.models.Credentials;
 import com.codecamp.SpyGlassApi.security.models.SecurityProperties;
 import com.codecamp.SpyGlassApi.security.utils.CookieUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 

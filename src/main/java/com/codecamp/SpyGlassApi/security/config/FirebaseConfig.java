@@ -1,6 +1,9 @@
 package com.codecamp.SpyGlassApi.security.config;
 
 import com.codecamp.SpyGlassApi.security.models.SecurityProperties;
+import com.google.auth.oauth2.GoogleCredentials;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.FirebaseOptions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

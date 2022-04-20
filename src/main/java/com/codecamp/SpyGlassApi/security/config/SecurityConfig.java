@@ -1,5 +1,6 @@
 package com.codecamp.SpyGlassApi.security.config;
 
+import com.codecamp.SpyGlassApi.security.filters.SecurityFilter;
 import com.codecamp.SpyGlassApi.security.models.SecurityProperties;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
