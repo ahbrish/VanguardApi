@@ -1,6 +1,7 @@
 package com.codecamp.SpyGlassApi.domain.goal.controller;
 
 import com.codecamp.SpyGlassApi.domain.BaseControllerTest;
+import com.codecamp.SpyGlassApi.domain.goal.exceptions.GoalNotFoundException;
 import com.codecamp.SpyGlassApi.domain.goal.model.Goal;
 import com.codecamp.SpyGlassApi.domain.goal.model.TypeOfGoal;
 import com.codecamp.SpyGlassApi.domain.goal.service.GoalService;
@@ -51,7 +52,7 @@ public class GoalControllerTest extends BaseControllerTest {
     @BeforeEach
     public void setUp() throws ParseException {
         simpleDateFormat = new SimpleDateFormat("dd-mm-yyyy");
-        user = new User("rtudor","Ryan","Tudor","rt@user.com");
+        user = new User("rt@user.com","Ryan","Tudor");
         inputGoal = new Goal(user, TypeOfGoal.VACATION, "bora bora","vacation with fam","beach icon","blue",500.00,100.00,simpleDateFormat.parse("05-25-2022"));
         mockResponseGoal1 = new Goal(user, TypeOfGoal.VACATION, "hawaii","vacation with fam","beach icon","blue",500.00,100.00,simpleDateFormat.parse("05-25-2022"));
         mockResponseGoal1.setId(1L);
@@ -80,11 +81,60 @@ public class GoalControllerTest extends BaseControllerTest {
     public void getGoalByIdTestSuccess() throws Exception{
         BDDMockito.doReturn(mockResponseGoal1).when(mockGoalService).getById(1L);
 
-        mockMvc.perform(get("/goal/{id}", 1))
+        mockMvc.perform(get("/goal/{id}", 1L))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.id", is(1)))
                 .andExpect(jsonPath("$.goalName", is("hawaii")));
+    }
+
+    @Test
+    @DisplayName("Get /goal/1 - Not Found")
+    public void getGoalByTitleTestFail() throws Exception {
+        BDDMockito.doThrow(new GoalNotFoundException("Goal Not Found")).when(mockGoalService).getById(1L);
+        mockMvc.perform(get("/goal/{id}", 1L))
+                .andExpect(status().isNotFound());
+    }
+
+    @Test
+    @DisplayName("PUT /goal/1 - Success")
+    public void putWidgetTestNotSuccess() throws Exception{
+        Goal expectedGoalUpdate = new Goal(user, TypeOfGoal.VACATION, "California","vacation with fam","beach icon","blue",500.00,100.00,simpleDateFormat.parse("05-25-2022"));
+        expectedGoalUpdate.setId(1L);
+        BDDMockito.doReturn(expectedGoalUpdate).when(mockGoalService).updateGoal(any());
+        mockMvc.perform(put("/goal/{id}", 1)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(asJsonString(inputGoal)))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.id", is(1)))
+                .andExpect(jsonPath("$.goalName", is("California")));
+    }
+
+    @Test
+    @DisplayName("PUT /goal/1 - Not Found")
+    public void putWidgetTestNotFound() throws Exception{
+        BDDMockito.doThrow(new GoalNotFoundException("Not Found")).when(mockGoalService).updateGoal(any());
+        mockMvc.perform(put("/widgets/{id}", 1)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(asJsonString(inputGoal)))
+                .andExpect(status().isNotFound());
+    }
+
+    @Test
+    @DisplayName("DELETE /widgets/1 - Success")
+    public void deleteWidgetTestNotSuccess() throws Exception{
+        BDDMockito.doReturn(true).when(mockGoalService).deleteGoal(any());
+        mockMvc.perform(delete("/goal/{id}", 1L))
+                .andExpect(status().isNoContent());
+    }
+
+    @Test
+    @DisplayName("DELETE /widgets/1 - Not Found")
+    public void deleteWidgetTestNotFound() throws Exception{
+        BDDMockito.doThrow(new GoalNotFoundException("Not Found")).when(mockGoalService).deleteGoal(any());
+        mockMvc.perform(delete("/widgets/{id}", 1L))
+                .andExpect(status().isNotFound());
     }
 
 }

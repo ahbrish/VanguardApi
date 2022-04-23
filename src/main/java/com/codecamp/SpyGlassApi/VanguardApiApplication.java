@@ -9,5 +9,4 @@ public class VanguardApiApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(VanguardApiApplication.class, args);
 	}
-
 }

@@ -32,8 +32,8 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public User findUserByUserName(String userName) throws UserNameNotFoundException {
-        Optional<User> userOptional = userRepo.findByUserName(userName);
+    public User findUserByEmail(String email) throws UserNameNotFoundException {
+        Optional<User> userOptional = userRepo.findByEmail(email);
         if(userOptional.isEmpty())
             throw new UserNameNotFoundException("UserName not found");
         return userOptional.get();
@@ -41,7 +41,7 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public List<Goal> getAllGoalsForUser(User user) throws UserNotFoundException {
-        Optional<User> userOptional = userRepo.findByUserName(user.getUserName());
+        Optional<User> userOptional = userRepo.findByEmail(user.getEmail());
         if(userOptional.isEmpty())
             throw new UserNotFoundException("User not found");
         User user1 = userOptional.get();
@@ -50,8 +50,8 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public void deleteUserAccount(String userName) throws UserNameNotFoundException {
-        Optional<User> userAccountExistOption = userRepo.findByUserName("tsunamiMaxx");
+    public void deleteUserAccount(String email) throws UserNameNotFoundException {
+        Optional<User> userAccountExistOption = userRepo.findByEmail(email);
         if(userAccountExistOption.isEmpty())
             throw new UserNameNotFoundException("Account with username not found");
         User userAccountToRemove = userAccountExistOption.get();
@@ -60,7 +60,7 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public User assignGoalsToUser(User user, Goal goal) throws UserNameNotFoundException {
-       Optional<User> userAccountExistOption = userRepo.findByUserName("tsunamiMaxx");
+       Optional<User> userAccountExistOption = userRepo.findByEmail(user.getEmail());
         if(userAccountExistOption.isEmpty())
             throw new UserNameNotFoundException("Account with username not found");
         User userFound = userAccountExistOption.get();

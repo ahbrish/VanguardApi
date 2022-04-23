@@ -48,9 +48,9 @@ public class UserServiceImplTest {
 
     @BeforeEach
     public void setUp() throws ParseException {
-        inputUser01 = new User("tsunamiMaxx","Maxx","Blue", "tsunamiMaxx@gmail.com");
-        outputUser01 = new User("tsunamiMaxx","Maxx","Blue","tsunamiMaxx@gmail.com");
-        outputUser01.setUserName("tsunamiMaxx");
+        inputUser01 = new User("tsunamiMaxx@gmail.com","Maxx","Blue");
+        outputUser01 = new User("tsunamiMaxx@gmail.com","Maxx","Blue");
+        outputUser01.setEmail("maxxTsunami@gmail.com");
 
         simpleDateFormat = new SimpleDateFormat("mm-dd-yyyy");
         inputGoal01 = new Goal(outputUser01, TypeOfGoal.VACATION, "bora bora","vacation with fam","beach icon","blue",500.00,100.00,simpleDateFormat.parse("05-25-2022"));
@@ -66,43 +66,39 @@ public class UserServiceImplTest {
         doReturn(outputUser01).when(mockUserRepo).save(ArgumentMatchers.any());
         User returnedUser = userService.createUser(inputUser01);
         Assertions.assertNotNull(returnedUser);
-        Assertions.assertEquals(returnedUser.getUserName(), "tsunamiMaxx");
+        Assertions.assertEquals(returnedUser.getEmail(), "tsunamiMaxx@gmail.com");
     }
 
     @Test
     @DisplayName("User Service findUserByUserName - Success")
     public void findByUserNameSuccess() throws UserNameNotFoundException {
-        doReturn(Optional.of(outputUser01)).when(mockUserRepo).findByUserName("tsunamiMaxx");
-        User foundUser = userService.findUserByUserName("tsunamiMaxx");
+        doReturn(Optional.of(outputUser01)).when(mockUserRepo).findByEmail("tsunamiMaxx@gmail.com");
+        User foundUser = userService.findUserByEmail("tsunamiMaxx@gmail.com");
         Assertions.assertEquals(outputUser01.toString(), foundUser.toString());
     }
 
     @Test
     @DisplayName("User Service findUserByUserName - Fail")
     public void findByUserNameFail(){
-        doReturn(Optional.empty()).when(mockUserRepo).findByUserName("tsunamiMaxx");
+        doReturn(Optional.empty()).when(mockUserRepo).findByEmail("tsunamiMaxx@gmail.com");
         Assertions.assertThrows(UserNameNotFoundException.class, () -> {
-            userService.findUserByUserName("tsunamiMaxx");});
+            userService.findUserByEmail("tsunamiMaxx@gmail.com");});
     }
 
     @Test
     @DisplayName("User Service: Get All Goals - Success")
     public void getAllGoalsSuccess() throws UserNameNotFoundException, GoalNotFoundException {
-        doReturn(Optional.of(outputUser01)).when(mockUserRepo).findByUserName("tsunamiMaxx");
-        User foundUser = userService.findUserByUserName("tsunamiMaxx");
+        doReturn(Optional.of(outputUser01)).when(mockUserRepo).findByEmail("tsunamiMaxx@gmail.com");
+        User foundUser = userService.findUserByEmail("tsunamiMaxx@gmail.com");
 
         List<Goal> goals = new ArrayList<>();
         goals.add(inputGoal01);
-//        doReturn(foundUser)
-//        Assertions.assertEquals();
-
-
     }
 
     @Test
     @DisplayName("Delete a User Account - Success")
     public void deleteUserAccount() throws UserNameNotFoundException{
-        doReturn(Optional.empty()).when(mockUserRepo).findByUserName("tsunamiMaxx");
+        doReturn(Optional.empty()).when(mockUserRepo).findByEmail("tsunamiMaxx@gmail.com");
         Assertions.assertThrows(UserNameNotFoundException.class, ()-> {
             userService.deleteUserAccount("tsunamiMaxx");
         });

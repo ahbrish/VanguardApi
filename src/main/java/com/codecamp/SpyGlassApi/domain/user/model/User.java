@@ -10,10 +10,11 @@ import java.util.List;
 public class User {
 
     @Id
-    private String userName;
+    private String email;
+
     private String firstName;
     private String lastName;
-    private String email;
+
 
     @OneToMany(targetEntity = Goal.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     @JoinColumn(name = "user_id")
@@ -22,19 +23,19 @@ public class User {
     public User() {
     }
 
-    public User(String userName, String firstName, String lastName, String email) {
-        this.userName = userName;
+    public User(String email, String firstName, String lastName) {
+        this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
+
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
     }
 
     public String getFirstName() {
@@ -61,21 +62,12 @@ public class User {
         this.listOfGoals = listOfGoals;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     @Override
     public String toString() {
         return "User{" +
-                "userName='" + userName + '\'' +
+                "email='" + email + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", email='" + email + '\'' +
                 ", listOfGoals=" + listOfGoals +
                 '}';
     }

@@ -11,7 +11,7 @@ import java.util.List;
 public interface UserService {
 
     User createUser(User user) throws UserNameTakenException;
-    User findUserByUserName(String userName) throws UserNameNotFoundException;
+    User findUserByEmail(String email) throws UserNameNotFoundException;
     List<Goal> getAllGoalsForUser(User user) throws UserNotFoundException;
     void deleteUserAccount(String userName) throws UserNameNotFoundException;
     User assignGoalsToUser(User user, Goal goals) throws UserNameNotFoundException;
