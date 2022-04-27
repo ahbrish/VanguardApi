@@ -115,7 +115,7 @@ public class GoalControllerTest extends BaseControllerTest {
     @DisplayName("PUT /goal/1 - Not Found")
     public void putWidgetTestNotFound() throws Exception{
         BDDMockito.doThrow(new GoalNotFoundException("Not Found")).when(mockGoalService).updateGoal(any());
-        mockMvc.perform(put("/widgets/{id}", 1)
+        mockMvc.perform(put("/goal/{id}", 1)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(asJsonString(inputGoal)))
                 .andExpect(status().isNotFound());
@@ -133,7 +133,7 @@ public class GoalControllerTest extends BaseControllerTest {
     @DisplayName("DELETE /widgets/1 - Not Found")
     public void deleteWidgetTestNotFound() throws Exception{
         BDDMockito.doThrow(new GoalNotFoundException("Not Found")).when(mockGoalService).deleteGoal(any());
-        mockMvc.perform(delete("/widgets/{id}", 1L))
+        mockMvc.perform(delete("/goal/{id}", 1L))
                 .andExpect(status().isNotFound());
     }
 
